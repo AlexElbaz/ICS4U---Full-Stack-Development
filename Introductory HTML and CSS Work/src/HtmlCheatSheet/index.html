@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML Cheat Sheet</title>
+    </head>
+    <body>
+
+        <a href="blog.html">Go to Blog</a>
+
+        <!-- Headings -->
+        <h1>Heading One</h1>
+        <h2>Heading Two</h2>
+        <h3>Heading Three</h3>
+        <h4>Heading Four</h4>
+        <h5>Heading Five</h5>
+        <h6>Heading Six</h6>
+
+        <!-- Paragraph (/formatting/links) -->
+        <p>
+            Lorem ipsum dolor, <strong>sit amet consectetur</strong> adipisicing elit. <em>Nemo neque praesentium, inventore architecto,</em> hic culpa officia impedit ad sequi veniam nam? Animi voluptates quia cumque sapiente dolorem aut tempora assumenda!
+                <!-- To get sample text type "Lorem" and hit tab (if you want say 10 words only, type "Lorem10")-->
+        </p>
+        <p>
+            Lorem ipsum dolor, sit amet <a href="http://google.com" target="_blank">consectetur adipisicing elit.</a> Nemo neque praesentium, inventore architecto, hic culpa officia impedit ad sequi veniam nam? Animi voluptates quia cumque sapiente dolorem aut tempora assumenda!
+                <!-- href="" attribute defines where link goes. target="_blank" makes it so that the link opens in a new tab rather than our website's tab (closing our website). -->
+        </p>
+
+        <!-- Lists -->
+        <ul>
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+            <li>List Item 4</li>
+        </ul>
+
+        <ol>
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+            <li>List Item 4</li>
+        </ol>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Benjamin Lee</td>
+                    <td>bl@something.com</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td>Anita Parks</td>
+                    <td>ap@something.com</td>
+                    <td>22</td>
+                </tr>
+                <tr>
+                    <td>Will Carr</td>
+                    <td>wc@something.com</td>
+                    <td>63</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br> <!-- Line break -- Starts a new line -->
+        <hr> <!-- Horizontal Rule -- Makes a horizontal line on the page -->
+        <br>
+
+        <!-- Forms -->
+        <form action="process.php" method="POST">
+            <div>
+                <label>First Name</label>
+                <input type="text" name="firstName" placeholder="Enter First Name">
+                    <!-- Placeholder attribute is like value attribute but the value disappears when user writes in the given field-->
+            </div>
+            <br>
+            <div>
+                <label>Last Name</label>
+                <input type="text" name="lastName">
+            </div>
+            <br>
+            <div>
+                <label>Email</label>
+                <input type="email" name="email">
+            </div>
+            <br>
+            <div>
+                <label>Message</label>
+                <textarea name="message"></textarea>
+            </div>
+            <br>
+            <div>
+                <label>Gender</label>
+                <select name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label>Age</label>
+                <input type="number" name="age" value="30">
+            </div>
+            <br>
+            <div>
+                <label>Birthday</label>
+                <input type="date" name="Birthday">
+            </div>
+            <br>
+            <input type="submit" name="submit" value="Submit">
+        </form>
+
+        <!-- Button -->
+        <button>Click Me</button>
+            <!-- Won't actually do anything unless hooked up to javascript -->
+
+        <br>
+
+        <!-- Image -->
+        <a href="Images/Sample.jpg">
+            <img src="Images/Sample.jpg" alt="My Sample Image" width="200">
+                <!-- Value in alt only displays if image cannot be found. Width and Height are both attributes, if only one is used however, it will adjust the other to keep original aspect ratio. -->
+        </a>
+
+        <!-- Quotations -->
+        <blockquote cite="http://coolquotes.com">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem recusandae nisi nostrum iure fugit possimus. Fuga neque voluptate quo laboriosam consequuntur aspernatur, voluptatem iusto expedita, quas placeat assumenda officia nihil.
+        </blockquote>
+
+        <p>The <abbr title="World Wide Web">WWW</abbr> is awesome.</p>
+
+        <p><cite>HTML Crash Course</cite> by Brad Traversy.</p>
+
+    </body>
+</html>
