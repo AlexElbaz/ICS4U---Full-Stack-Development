@@ -1,0 +1,203 @@
+/*  *{     * is like saying everything. Every element on a page is affected by changes made under an *{}. Usually used to reset all defaulted settings like padding, margins etc. which some elements have without us doing anything (i.e. headings).
+        margin:0px;
+        padding:0px;
+    }
+*/
+
+body{
+    background-color:#e4e4e4;
+    color:#222222;
+    font-family:Arial, Helvetica, sans-serif; /* Serif fonts = fonts with hooks on letters, i.e. Times New Roman. Sans-serif fonts = fonts with flat sides, no hooks, i.e. Arial. */
+    font-size:16px;
+    font-weight:normal;
+
+    /* font:normal 16px Arial, Helvetica, sans-serif; */
+        /* Same as lines 4-6 (all font- lines), just more efficient (all in one line). */
+    
+    line-height:1.6em;
+    margin:0px;      
+}
+
+a{  /* Applies to all links on page. */
+    text-decoration: none;
+	color:#000;
+}
+
+a:hover{ /* When you hover over a link, the below will happen. */
+	color:red;
+}
+
+a:active{   /* When you activate (click in the case of a link) a link the below will happen. */
+	color:green;
+}
+
+a:visited{ /* When a link is visited the below will happen. (Got rid of what was there because the links we were using defaulted to the visisted state because we used "#" which just links us to the page we are already on. */
+	
+}
+
+.button{    /* Applies to everything of the button class, so we can easily style all buttons to look a certain way. */
+	background-color:#333;
+	color:#fff;
+	padding:10px 15px;
+	border:none;
+}
+
+.button:hover{  /* Similar to a:hover, whenever we hover over an element of the button class, the below will happen. */
+	background:red;
+	color:#fff;
+}
+
+.clr{   /* clr = clear fix. Used to clear floats above the line where this class is called (doesn't actually get rid of them, just sets them apart from next lines) so that the next lines format properly. */
+	clear:both;
+}
+
+.container{
+    width:80%; /* Could use a number of pixels like width:500px;, issue being when you shrink the window etc. it doesn't scale correctly and messes up format-wise, therefore better to do a percentage so it adjusts properly and remains consistent no matter the window size. */
+    margin:auto; /* Centers */
+}
+
+.box-1{ /* Just like # accesses ids, . accesses classes (so this will style all elements with the class box-1). */
+    background-color:#444; /* Normally hexadecimal colours are 6 "digits" but if you are going to do all 6 digits the same (i.e. #444444) then just doing 3 digits (#444) will achieve the same result. */
+    color:#fff;
+
+    border-top:5px red solid;
+    border-right:5px red solid;
+    border-bottom:5px red solid;
+    border-left:5px red solid;
+    /*Below is same as above, just more efficient*/
+    border:5px red solid;
+
+    border-bottom-width:10px;
+    border-top-style:dotted;
+    /*Below line is just to overwrite above two lines*/
+    border:5px red solid;
+
+    padding:20px; /*Moves elements of box1 away (inwards) from border.*/
+
+    margin:20px 0px; /*Moves entirety of box1 (inclduing border) down from the top of the page.*/
+}
+
+.box-1 h1{
+	font-family:Tahoma;
+	font-weight:800;
+	font-style:italic;
+	text-decoration:underline;
+	text-transform:uppercase;
+	letter-spacing:0.2em;
+	word-spacing:1em;
+}
+
+.box-2{
+	border:3px dotted #ccc;
+	padding:20px;
+	margin:20px 0px;
+}
+
+.categories{
+	border:1px #ccc solid;
+	padding:10px;
+	border-radius:15px;
+}
+
+.categories h2{
+	text-align:center;
+}
+
+.categories ul{
+	padding:0px;
+	padding-left:20px;
+	list-style:square; /* Makes bullet points sqaure. */
+	list-style:none; /* Makes bullet points disappear. */
+}
+
+.categories li{
+	padding-bottom:6px;
+	border-bottom:dotted 1px #333;
+	list-style-image:url('../images/check.png'); /* ../ is to get out of current folder. As check.png is in images folder and this file is in css folder, we need to get out of css folder to then access images folder. */
+}
+
+.my-form{
+	padding:20px;
+}
+
+.my-form .form-group{
+	padding-bottom:15px;
+}
+
+.my-form label{
+	display:block;
+}
+
+.my-form input[type="text"], .my-form textarea{		/* If you want to access multiple elements, separate them by a comma. */
+	padding:8px;
+	width:100%;
+}
+
+.block{
+	float:left;
+	width:33.3%;
+	border:1px solid #ccc;
+	padding:10px;
+	box-sizing:border-box; /* Makes sure that all floated elements stay on one line even with the extra padding and border added on top of the 1/3 of the width each element is alloted. */
+}
+
+#main-block{
+	float:left;
+	width:70%;
+	padding:15px;
+	box-sizing:border-box;
+}
+
+#sidebar{
+	float:right;
+	width:30%;
+	background-color:#333;
+	color:#fff;
+	padding:15px;
+	box-sizing:border-box;
+}
+
+.p-box{
+	width:800px;
+	height:500px;
+	border:1px solid #000;
+	margin-top:30px;
+	position:relative;
+	background-image:url('../images/bgimage.jpg');
+	background-repeat:no-repeat; /* Background by default will repeat itself if the image is too small for the given box etc. this will stop that form happening. */
+	background-position:100px 200px;
+	background-position:center top;
+}
+
+.p-box h1{
+	position:absolute;
+	top:100px;
+	left:200px;
+}
+
+.p-box h2{
+	position:absolute;
+	bottom:40px;
+	right:100px;
+}
+
+.fix-me{
+	position:fixed;
+	top:400px;
+}
+
+.my-list li:first-child{	/* li:first-child = first of the li elements in the list. */
+	background:red;
+}
+
+.my-list li:last-child{		/* li:last-child = last of the li elements in the list. */
+	background:blue;
+}
+
+.my-list li:nth-child(5){	/* li:nth-child(_) accesses whatever li element numbered in the brackets. */
+	background:yellow;
+}
+
+.my-list li:nth-child(even){	/* li:nth-child(even/odd) accesses all li elements that are either even or odd depending on what is put in the brackets. */
+	background:grey;
+}

@@ -1,0 +1,91 @@
+body{
+	background-color:#f4f4f4;
+	color:#555;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	line-height:1.6em;
+	margin:0px;
+}
+
+.container{
+	width:80%;
+	margin:auto;
+	overflow:hidden; /* When text goes past it's designated area it doesn't bring up a scrollbar, it just hides it or smthn. Prob best to just look up what this does again. */
+}
+
+#main-header{
+	background-color:coral;
+	color:#fff;
+}
+
+#navbar{
+	background-color:#333;
+	color:#fff;
+}
+
+#navbar ul{
+	padding:0px;
+	list-style:none;
+}
+
+#navbar li{
+	display:inline; /* Makes it so that all li elements (links in this case) are all on the same line. */
+}
+
+#navbar a{
+	color:#fff;
+	text-decoration:none; /* Removes underline. */
+	font-size:18px;
+	padding-right:15px;
+}
+
+#showcase{
+	background-image:url('../images/showcase.jpg');
+	background-position:center right;
+	min-height:300px; /* Makes showcase element responsive. When window is large enough size, the minimum height of the element is 300px, however when window shrinks, the element will grow to fit text. */
+	margin-bottom:30px;
+	text-align:center;
+}
+
+#showcase h1{
+	color:#fff;
+	font-size:50px;
+	line-height:1.6em;
+	padding-top:30px;
+}
+
+#main{
+	float:left;
+	width:70%;
+	padding:0px 30px;
+	box-sizing:border-box;
+}
+
+#sidebar{
+	float:right;
+	width:30%;
+	background:#333;
+	color:#fff;
+	padding:10px;
+	box-sizing:border-box;
+}
+
+#main-footer{
+	background:#333;
+	color:#fff;
+	text-align:center;
+	padding:20px;
+	margin-top:40px;
+}
+
+@media(max-width:600px){    /* Sort of like an if statement, the below statements will only apply if the window is below 600px across (max-width of the window must be over 600px). Basically this makes it so that when the window gets too small the main and sidebar id elements unfloat and go one on top of the other. */
+	#main{  /* Unfloats element with main id and lets it go across the entire allowable space (rather than the previous 70% of that space due to the float). */
+		width:100%;
+		float:none;
+	}
+
+	#sidebar{   /* Unfloats element with sidebar id and lets it go across the entire allowable space (rather than the previous 30% of that space due to the float). */
+		width:100%;
+		float:none;
+	}
+}
