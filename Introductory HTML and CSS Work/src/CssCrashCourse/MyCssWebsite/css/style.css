@@ -39,6 +39,10 @@ body{
 	padding-right:15px;
 }
 
+#navbar a:hover{
+	color:red;
+}
+
 #showcase{
 	background-image:url('../images/showcase.jpg');
 	background-position:center right;
