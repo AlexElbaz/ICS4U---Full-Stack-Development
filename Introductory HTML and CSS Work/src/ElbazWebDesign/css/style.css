@@ -1,0 +1,228 @@
+body{
+    font:15px/1.5em Arial, Helvetica, sans-serif;
+        /* Quicker way of setting font-size, line-height, and font-family (Note: must be in order "font-size/line-height font-family;"). */
+    padding:0;
+    margin:0;
+    background-color:#eee;
+}
+
+/* Global */
+.container{
+    width:80%;
+    margin:auto;
+    overflow:hidden;
+}
+
+ul{
+    padding:0;
+    margin:0;
+}
+
+.button-1{
+    height:38px;
+    background:#e8491d;
+    color:#fff;
+    border:none;
+    padding:0 20px;
+}
+
+.button-1:hover{
+    background:#d8390a;
+}
+
+.dark{
+    padding:15px;
+    background:#35424a;
+    color:#fff;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+
+/* Header */
+header{
+    background:#35424a;
+    color:#fff;
+    padding-top:30px;
+    min-height:70px;
+    border-bottom:#e8491d 3px solid;
+}
+
+header a{
+    color:#fff;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:16px;
+}
+
+header li{
+    float:left;
+    display:inline;
+    padding:0 20px;
+}
+
+header #branding{
+    float:left
+}
+
+header #branding h1{
+    margin:0;
+}
+
+header nav{
+    float:right;
+    margin-top:10px;
+}
+
+header .highlight, header .current a{
+    color:#e8491d;
+    font-weight:bold;
+}
+
+header a:hover{
+    color:#bbb;
+    font-weight:bold;
+}
+
+
+/* Showcase */
+#showcase{
+    min-height:400px;
+    background:url('../imgs/Showcase.png') no-repeat -500px -500px;
+    text-align:center;
+    color:#fff;
+}
+
+#showcase h1{
+    margin-top:150px;
+    font-size:55px;
+    line-height:1em;
+    margin-bottom:50px;
+}
+
+#showcase p{
+    font-size:20px;
+}
+
+
+/* Newsletter */
+#newsletter{
+    padding:15px;
+    color:#fff;
+    background:#35424a;
+}
+
+#newsletter h1{
+    float:left;
+}
+
+#newsletter form{
+    float:right;
+    margin-top:15px;
+}
+
+#newsletter input[type="email"]{
+    padding:4px;
+    height:25px;
+    width:250px;
+}
+
+
+/* Text-Blocks */
+#text-blocks{
+    margin-top:20px;
+}
+
+#text-blocks .block{
+    float:left;
+    width:30%; 
+    padding:10px;
+    text-align:center;  /* Aligns more than just text. It will align entire objects (divs in this case) specified in the head of this code block. */
+}
+ 
+#text-blocks .block img{
+    width:90px;
+}
+
+#text-blocks #graphic-design{
+    margin-top:12px;
+}
+
+#text-blocks #graphic-design h3{
+    margin-top:27px;
+}
+
+
+/* Sidebar */ 
+#sidebar{      /* Because sidebar is an id and is unique, can/should just do #sidebar, but if you're gonna do what he did in the video, being articl#sidebar, you MUST do it exactly like that, no space allowed or else it'll mess up, not sure exactly why. */
+ float:right;
+ width:30%;
+ margin-top:10px;
+}
+
+#sidebar .quote input, #sidebar .quote textarea{
+    width:90%;
+    padding:5px;
+}
+
+
+/* Main-col */
+#main-col{
+    float:left;
+    width:60%;
+}
+
+
+/* Services */
+#services li{
+    list-style: none;
+    padding: 20px;
+    border: #ccc solid 1px;
+    margin-bottom: 5px;
+    background: #e6e6e6;
+}
+
+
+/* Footer */
+footer{
+    margin-top:20px;
+    padding:20px;
+    background-color: #e8491d;
+    color:#fff;
+    text-align: center;
+}
+
+ 
+/* Media Queries */
+@media(max-width:768px){    /* Typical tablet/mobile device starts at around 768px, so when the window size is below that, the following will apply.*/
+    header #branding, 
+    header nav, 
+    header nav li,
+    #newsletter h1,
+    #newsletter form,
+    #text-blocks .block,
+    #main-col,
+    #sidebar{
+        float:none;
+        text-align:center;
+        width:100%;
+    }
+ 
+    header{
+        padding-bottom:10px;
+    }
+ 
+    #showcase h1{
+        margin-top:30px;
+    }
+ 
+    #newsletter button, .quote button{
+        display:block;
+        width:100%;
+    }
+ 
+    #newsletter form input[type="email"], .quote input, .quote textarea{
+        width:100%;
+        margin-bottom:5px;
+    }
+}
