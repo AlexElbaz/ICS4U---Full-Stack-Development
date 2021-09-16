@@ -1,0 +1,61 @@
+@media(min-width:468px){  /* If the width is at least 468px then do the below. */
+    .container-1{
+      display:flex;     /* Creates a flexbox for elements of this class. */
+
+      /*
+      align-items:flex-start;   Aligns to left side of page
+      align-items:flex-end;     Aligns to right side of page
+      align-items:center;       Aligns to center of page (horizontal)
+      
+      flex-direction:column;    Makes items go vertically (in coloumns) rather than horizontally (in rows) by default
+      */
+    }
+
+
+    .container-2{
+      display:flex;
+
+      /*
+      justify-content:flex-start;
+      justify-content:flex-end;
+      justify-content:center;
+      justify-content:space-around;     Puts equal space around left and right sides of every element within a flexbox (including on the right side of right-most item and left side of left-most item).
+      */
+
+      justify-content:space-between;    /* Puts equal space between every element within a flexbox (excludes left side of left-most element and right side of right-most element). */
+    }
+  }
+  
+  .container-3{
+    display:flex;  
+    flex-wrap:wrap;     /* Makes it so that if the elements in a flexbox get too squished, they will start going to the next line one by one from right to left. This process will repeat as the window gets smaller until there is only one box on each row. */
+    justify-content:space-between;
+  }
+  
+  .container-1 div, .container-2 div, .container-3 div{
+    border:1px #ccc solid;
+    padding:10px;
+  }
+  
+  .box-1{
+    flex:2;     /* Increases the width of elements in this box-1 class in comparison to other boxes in this flexbox. The number is like a ratio, if other boxes have flex:1, than this flex:2 box will be double the size of those flex:1 boxes. */
+    order:2;    /* Determines the order of the boxes in a flexbox. */
+  }
+  
+  .box-2{
+    flex:1;
+    order:1;
+  }
+  
+  .box-3{
+    flex:1;
+    order: 3;
+  }
+  
+  .container-2-box{
+    flex-basis: 27%;  /* Same as width, just more aimed towards flexboxes.*/
+  }
+  
+  .container-3-box{
+    flex-basis:12%;
+  }
