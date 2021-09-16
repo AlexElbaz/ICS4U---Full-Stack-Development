@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS Grid 2</title>
+  <style>
+    .wrapper{
+      display:grid;
+      /* grid-template-columns:1fr 1fr 1fr;*/
+      grid-template-columns:repeat(3, 1fr); /* Just like doing the above but rather than just typing 1fr 3 times for one row (and the program knowing that you want to repeat it for all elements), you are saying repeat 1fr 3 times for as many elements as there are. */
+      grid-gap:1em;
+      /* grid-auto-rows:100px;    Sets height of rows. */
+      grid-auto-rows:minmax(100px, auto);  /* Same as above but responsive, rather than hard stopping the height of the rows at 100px, it will start there but then automatically stretch the height of that row to fit whatever element is in a given box. */
+    }
+
+    .nested{  /* Grid inside of grid. Hence this grid is NESTED in another grid. */
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      grid-auto-rows:70px;
+      grid-gap:1em;
+    }
+
+    .wrapper > div{   /* ">" Makes it so that it affects exclusively wrapper class divs, and not divs under another class inside the wrapper class. i.e. if ">" was not here, the divs inside of the nested class div would be affected by the colour change odd children undergo to differientiate the grid boxes from each other. */
+      background:#eee;
+      padding:1em;
+    }
+    .wrapper div:nth-child(odd){
+      background:#ddd;
+    }
+
+    .nested div{
+      border:#333 1px solid;
+      padding:1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div>
+      Lorem ipsum dolor sit.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam libero excepturi cupiditate quasi sit. Iure totam a magni, veritatis, voluptatem voluptates tempora praesentium et nisi eligendi. A saepe eaque aliquam, earum nihil quia? Nemo delectus possimus, explicabo repudiandae recusandae. Mollitia!
+    </div>
+    <div class="nested">
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+      <div>Lorem</div>
+    </div>
+    <div>
+      Lorem ipsum dolor sit.
+    </div>
+    <div>
+      Lorem ipsum dolor sit.
+    </div>
+    <div>
+      Lorem ipsum dolor sit.
+    </div>
+    <div>
+      Lorem ipsum dolor sit.
+    </div>
+  </div>
+</body>
+</html>

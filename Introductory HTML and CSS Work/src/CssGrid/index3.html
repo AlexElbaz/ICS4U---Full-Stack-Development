@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CSS Grid 3</title>
+  <style>
+    .wrapper{
+      display:grid;
+      grid-template-columns:1fr 2fr 1fr;
+      grid-auto-rows:minmax(100px, auto);
+      grid-gap:1em;
+      justify-items:stretch;  /* Like the justify... in flexbox, this makes the elements align a certain way left to right. (:start=left side, etc.). Stretch is the default and stretches elements across the whole page. */
+      align-items:stretch;    /*Similar to justify... align... makes elements align a certain way up and down (:start=top, etc.). Stretch is default and stretches elements across the whole row. */
+    }
+
+    .wrapper div{
+      background:#eee;
+      padding:1em;
+    }
+    .wrapper div:nth-child(odd){
+      background:#ddd;
+    }
+
+    .box1{
+      /*align-self:start;   Align self is used to align just this element rather than all elements. */
+      grid-column:1/3;  /* Stretches this element from grid position 1 to grid position 3 horizontally (it will take up grid coloumns 1 & 2 on the whatever row it is on). */
+      grid-row:1/3;     /* Stretches this element from grid position 1 to grid position 3 vertically (it will take up grid rows 1 & 2 in the whatever column it is in). */
+    }
+
+    .box2{
+      /*align-self:end;*/
+      grid-column:3;  /* Puts this element in grid column 3. Can be used to switch grid boxes around in position without changing their positioning in the html. */
+      grid-row:1/3;
+    }
+
+    .box3{
+      /*justify-self:end;*/
+      grid-column:2/4;
+      grid-row:3;
+    }
+
+    .box4{
+      grid-column:1;
+      grid-row:2/4;   /* Even though there is already a box that takes up rows 1 to 3, you can still put another box from 2 to 4. Why? Because using a grid system, boxes can overlap. This specifically causes an overlap of box4 over box1 in row 2.*/
+      border:1px solid #333;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="box box1">Box 1</div>
+    <div class="box box2">Box 2</div>
+    <div class="box box3">Box 3</div>
+    <div class="box box4">Box 4</div>
+  </div>
+</body>
+</html>
