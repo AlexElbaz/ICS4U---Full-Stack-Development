@@ -1,0 +1,112 @@
+body::before{   
+    display: block;
+    content: '';
+    height: 70px;
+}
+
+html, body {
+    height:100%;
+}   
+
+ul{
+    list-style-type: none;
+}
+
+
+.text-cream{
+    color:#faeed3;
+}
+
+.title-style{
+    text-decoration:none;
+    font-family:Gill Sans MT, Calibri, sans-serif;
+}
+
+
+.bg-roseGrey{
+    background:#504044;
+}
+
+.bg-maroon{
+    background:#642020;
+}
+
+.bg-grey{
+    background: #333333;
+}
+
+
+.btn-rose{
+    background:#fdcfbc;
+}
+
+.btn-rose:hover{
+    background:#ffd7c5;
+}
+
+
+.border-left{
+    border-left:1px solid #ffffff;
+    padding-left: 50px;
+}
+
+.border-right{
+    border-right:1px solid #ffffff;
+    padding-right: 50px;
+}
+
+
+.image-link:hover{
+    filter: brightness(0.80);
+}
+
+
+.twitter-color{
+    color:#00acee;
+}
+
+.facebook-color{
+    color:#4267B2;
+}
+
+.linkedin-color{
+    color:#0077b5;
+}
+
+.instagram-color{
+    color:#833ab4;
+}
+
+
+#bg-image-coding{
+    position: fixed;
+    background: url("https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+
+#about-height-container{
+    min-height:82.558vh;
+}
+
+
+#contact-height-container{
+    min-height:84.418vh;
+}
+
+
+@media(min-width:768px){
+    .w-md-50{
+        width:50%;
+    }
+
+    .height-md-max{
+        height:84.418vh;
+    }
+}
