@@ -154,7 +154,7 @@ header a:hover{
 
 
 /* Sidebar */ 
-#sidebar{      /* Because sidebar is an id and is unique, can/should just do #sidebar, but if you're gonna do what he did in the video, being articl#sidebar, you MUST do it exactly like that, no space allowed or else it'll mess up, not sure exactly why. */
+#sidebar{      /* Because sidebar is an id and is unique, can/should just do #sidebar, but if you're gonna do what he did in the video, being aside#sidebar, you MUST do it exactly like that, no space allowed or else it'll mess up, not sure exactly why. */
  float:right;
  width:30%;
  margin-top:10px;
