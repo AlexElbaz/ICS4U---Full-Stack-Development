@@ -1,9 +1,22 @@
-.line-up {
-    position: absolute;
-    /* FINISH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+body::before{   
+    display: block;
+    content: '';
+    height: 100px;
 }
 
+.special-margin-one {
+    margin-left:29.1%;
+}
 
-.borderless {
+.special-margin-two {
+    margin-left:16.7%;
+}
+
+.special-margin-three {
+    margin-left:33.5%;
+}
+
+.bg-tertiary {
+    background-color:#c0c5c9;
     border: none;
 }
