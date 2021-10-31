@@ -11,7 +11,7 @@
    <title>VNL 2021 | Add Matches</title>
 </head>
 
-<body>
+<body class='bg-dark'>
    <nav class="navbar navbar-expand-lg bg-primary navbar-dark py-3 fixed-top">
       <div class="container">
         <a href="#" class="h1 bg-primary text-decoration-none text-light">VNL 2021 Add Matches</a>
@@ -25,51 +25,52 @@
               <a href="matches.html" class="nav-link text-light">Match History</a>
             </li>
             <li class="nav-item text-center text-lg-start">
-              <a href="addMatches.html" class="nav-link text-light">Add Matches</a>
+              <a href="addMatches.html" class="nav-link text-info">Add Matches</a>
             </li>
             </ul>
         </div>
       </div>
     </nav>
    <div class="container card p-4">
+      <h2 class="title text-center mb-4">Volleyball Nations League 2021 Add Matches</h2>
       <form class="row g-3">
         <div class="col-md-6">
           <label for="" class="form-label">Home Team:</label>
-          <input type="text" class="form-control" id="homeTeam" placeholder="Home Team Name...">
+          <input type="text" class="form-control" id="homeTeam" placeholder="Home Team...">
         </div>
         <div class="col-md-6">
           <label for="" class="form-label">Away Team:</label>
-          <input type="text" class="form-control" id="awayTeam" placeholder="Away Team Name...">
+          <input type="text" class="form-control" id="awayTeam" placeholder="Away Team...">
         </div>
         <div class="col-4">
           <label for="" class="form-label">Set 1 Score (HomeScore-AwayScore):</label>
-          <input type="text" class="form-control" id="setOne" placeholder="xx-xx">
+          <input type="text" class="form-control" id="setOne" placeholder="xx-xx...">
         </div>
         <div class="col-4">
           <label for="inputAddress2" class="form-label">Set 2 Score (HomeScore-AwayScore):</label>
-          <input type="text" class="form-control" id="setTwo" placeholder="xx-xx">
+          <input type="text" class="form-control" id="setTwo" placeholder="xx-xx...">
         </div>
         <div class="col-4">
           <label for="inputAddress2" class="form-label">Set 3 Score (HomeScore-AwayScore):</label>
-          <input type="text" class="form-control" id="setThree" placeholder="xx-xx">
+          <input type="text" class="form-control" id="setThree" placeholder="xx-xx...">
         </div>
         <div class="col-6">
           <label for="inputAddress2" class="form-label">(OPTIONAL) Set 4 Score (HomeScore-AwayScore):</label>
-          <input type="text" class="form-control" id="setFour" placeholder="xx-xx">
+          <input type="text" class="form-control" id="setFour" placeholder="xx-xx...">
         </div>
         <div class="col-6">
           <label for="inputAddress2" class="form-label">(OPTIONAL) Set 5 Score (HomeScore-AwayScore):</label>
-          <input type="text" class="form-control" id="setFive" placeholder="xx-xx">
+          <input type="text" class="form-control" id="setFive" placeholder="xx-xx...">
         </div>
         <div class="col-12 text-center">
-          <button type="button" class="btn btn-lg btn-primary" onclick="createMatch()">Add New Match</button>
-          <button type="button" class="btn btn-lg btn-primary" onclick="clearStorage()">Clear New Matches</button>
+          <button type="button" class="btn btn-lg btn-primary" onclick="createNewMatch()">Add New Match</button>
+          <button type="button" class="btn btn-lg btn-primary" onclick="clearStorage()">Clear Added Matches</button>
         </div>
       </form>
       <p class="lead text-center mt-3" id="msg"></p>
    </div>
 
-   <script src="addMatches.js"></script>
+   <script src="main.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 

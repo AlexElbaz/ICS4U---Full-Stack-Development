@@ -1,22 +1,31 @@
-body::before{   
+body::before{   /* Makes it so that there is a 'ghost element' underneath the header. Essentially makes it so that the header doesn't cover the top of whatever is on the page */
     display: block;
     content: '';
-    height: 100px;
-}
-
-.special-margin-one {
-    margin-left:29.1%;
-}
-
-.special-margin-two {
-    margin-left:16.7%;
-}
-
-.special-margin-three {
-    margin-left:33.5%;
+    height: 115px;
 }
 
 .bg-tertiary {
     background-color:#c0c5c9;
     border: none;
+}
+
+
+@media (min-width:768px) {
+    .me-md-3 {
+        margin-right: 1rem;
+    }
+
+    .ms-md-3 {
+        margin-left: 1rem;
+    }
+
+    .mx-md-5 {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    .mx-md-2 {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
 }
