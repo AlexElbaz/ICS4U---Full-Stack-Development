@@ -47,9 +47,8 @@ export default {
       return data
    },
 
-   async getTenMatches() {
-    document.querySelector(`#btn${this.pageNum}`).classList.add("active"); // Makes button of current page darker.
-
+    // Master function for creating the matches pages. Called upon mount of this path.
+   async getMatches() {
     let allMatches = await this.fetchMatches();
     allMatches.reverse(); // To make JSON in order from most recent to least recent match.
     allMatches.forEach(match => {
@@ -57,13 +56,20 @@ export default {
         this.matches.push(body);
     });
 
-    // Goes through the matches array and only displays the 10 matches that are supposed to be displayed on that given page. 
+    this.displayTenMatches(); // Makes it so only 10 matches display to the screen at a time (matches displayed depend on pageNum).
+  },
+
+  // Goes through the matches array and only displays the 10 matches that are supposed to be displayed on that given page. 
+  displayTenMatches() {
+    document.querySelector(`#btn${this.pageNum}`).classList.add("active"); // Makes button of current page darker.
+
     for (let i = 0; i < this.matches.length; i++) {
-        if (i >= (this.pageNum - 1) * 10 && i < (this.pageNum) * 10)
-            document.querySelector('#rows').appendChild(this.matches[i]);
+      if (i >= (this.pageNum - 1) * 10 && i < (this.pageNum) * 10)
+        document.querySelector('#rows').appendChild(this.matches[i]);
     }
   },
 
+  // Creates match elements based on the specific match passed in each call of the function.
   createMatch(match) {
     let newBody = document.createElement('tbody');
     newBody.setAttribute('scope', 'body');
@@ -78,7 +84,7 @@ export default {
     
     let newCell = document.createElement('td');
     newCell.appendChild(document.createTextNode(match.id));
-    newCell.classList.add('position-absolute', 'top-0', 'start-0', 'small'); // Extra classes (specifically position classes) make it so that id appears in the top left of the match card.
+    newCell.classList.add('position-absolute', 'top-0', 'start-0', 'small'); // Position classes make it so that id appears in the top left of the match card.
     firstNewRow.appendChild(newCell);
 
     newCell = document.createElement('td');
@@ -90,7 +96,7 @@ export default {
     newCell = document.createElement('td');
     newCell.appendChild(document.createTextNode(match.homeSets));
     newCell.classList.add('ms-md-3', 'me-1', 'd-inline', 'h5');
-    if (match.homeSets > match.awaySets) // Used to make the team who won's sets red so that it is easy to see who won.
+    if (match.homeSets > match.awaySets) // Used to make the team who won's sets element red so that it is easy to see who won the match.
         newCell.classList.add('text-danger'); 
     firstNewRow.appendChild(newCell);
 
@@ -102,7 +108,7 @@ export default {
     newCell = document.createElement('td');
     newCell.appendChild(document.createTextNode(match.awaySets));
     newCell.classList.add('ms-1', 'me-md-3', 'd-inline', 'h5');
-    if (match.awaySets > match.homeSets) // Makes the team who won's sets red so that it is easy to see who won.
+    if (match.awaySets > match.homeSets) // Used to make the team who won's sets element red so that it is easy to see who won the match.
         newCell.classList.add('text-danger');
     firstNewRow.appendChild(newCell);
 
@@ -143,7 +149,7 @@ export default {
         if (match.setFive != null) {
             newCell = document.createElement('td');
             newCell.appendChild(document.createTextNode(match.setFive));
-            newCell.classList.add('mx-md-2', 'd-sm-inline', 'd-block', 'text-center'); // Extra classes & edits to them (d-sm-inline, d-block, text-center) are to make it so that when the page gets narrow, the last game moves to an entirely new row rather than half spilling over. Only need to do for last game, the rest are fine on one row no matter screen width. Note, with the way other elements/classes are set up, text-center doesn't effect this element until it is on it's own line.
+            newCell.classList.add('mx-md-2', 'd-sm-inline', 'd-block', 'text-center'); // Extra classes & edits to them (d-sm-inline, d-block, text-center) are to make it so that when the page gets narrow, the last game moves to an entirely new row rather than half spilling over (looks bad). Only need to do for game 5, the rest are fine on one row no matter screen width. Note, with the way other elements/classes are set up, text-center doesn't effect this element until it is on it's own line.
             secondNewRow.appendChild(newCell);
         }
     }
@@ -152,13 +158,14 @@ export default {
 
     return newBody;
   },
-   
+
+  // Gets flags from assets folder and styles them to fit appropriately for the match elements.
   getFlag(teamName) {
     let flag = document.createElement('img');
     if (this.validTeams.includes(teamName))  // If the team passed in is valid (it is one of the teams that played in this season) then grab the image for its flag.
-        flag.src = this.getFlagUrl(teamName);
-    else    // If the team passed in is not a valid team, grab the image for the generic question mark flag.
-        flag.src = this.getUnknownFlagUrl();
+        flag.src = this.getFlagUrl(teamName); // Gets path to specific team's flag image
+    else    // If the team passed in is not a valid team, grab the generic flag image (question mark flag).
+        flag.src = this.getUnknownFlagUrl(); // Gets path to question mark flag image
     flag.classList.add('d-none', 'd-xl-inline');
     flag.style.width = '15%';
     flag.style.marginLeft = '10px';
@@ -167,49 +174,53 @@ export default {
     return flag;
   },
 
+  // Gets paths for/preloads the team flags so that they can dispaly properly.
   getFlagUrl(flag) {
     let img = require.context('../assets/', false, /\.png$/);
     return img('./' + flag + ".png");
   },
 
+  // Gets path for/preloads the question mark flag so it can dispaly properly.
   getUnknownFlagUrl() {
     let img = require.context('../assets/', false, /\.jpg$/);
     return img('./' + 'questionMark' + ".jpg");
   },
 
+  // Called when one of the page buttons is pressed. Changes the page to a new set of 10 matches depending on newPage (the page the user wants to go to). 
   changePage(newPage) {
     document.querySelector(`#btn${this.pageNum}`).classList.remove("active");
     this.pageNum = newPage;
-    this.matches = [];   // Resets matches array so that when getTenMatches() is called again, it doesn't push more onto the already populated array.
     document.querySelector('#rows').innerHTML = '';
-    this.getTenMatches();
+    this.displayTenMatches();
   },
 
+  // Called when #btnPrev is pressed. Changes the displayed matches to a new set 10 of matches from the page 1 before the current page.
   previousPage() {
     if (this.pageNum > 1) {  // Stops user from going below page 1 (which doesn't exist).
         document.querySelector(`#btn${this.pageNum}`).classList.remove("active");
         this.pageNum -= 1;
-        this.matches = [];
         document.querySelector('#rows').innerHTML = '';
-        this.getTenMatches();
+        this.displayTenMatches();
     }
   },
 
+  // Called when #btnNext is pressed. Changes the displayed matches to a new set 10 of matches from the page 1 after the current page.
   nextPage() {
     if (this.pageNum < Math.ceil(this.matches.length/10)) {  // Stops user from going to a page higher than would exist based on the amount of matches in matches array (i.e. if there are 120 matches, there are 12 pages. This stops the user from attempting to go to the 13th page which doesn't exist (until new matches are added)).
         document.querySelector(`#btn${this.pageNum}`).classList.remove("active");
         this.pageNum += 1;
-        this.matches = [];
         document.querySelector('#rows').innerHTML = '';
-        this.getTenMatches();
+        this.displayTenMatches();
     }
   },
 
+  // Finds the first and last pagination buttons and makes it so that they display on all screen sizes (rather than disappearing on medium screen width like the rest of the pagination buttons).
   async editEndButtons() {
     document.querySelector('#btn1').classList.remove('d-none', 'd-md-inline');
     document.querySelector(`#btn${this.totalPages}`).classList.remove('d-none', 'd-md-inline');
   },
 
+  // Goes through standings array and gets the teams that played this season to populate an array of all valid teams.
   async getValidTeams() {
     (await this.fetchStandings()).forEach(team => this.validTeams.push(team.team));
   }
@@ -219,8 +230,8 @@ export default {
     this.startingMatches = 120;
     this.totalPages = Math.ceil((await this.fetchMatches()).length/10); // Formula to find how many pages will be needed for the amount of matches in the database.
     this.getValidTeams();
-    this.$nextTick(() => {  // Everything isn't fully rendered by the time mounted is called (which causes errors when the functions inside are called), so this.nextTick(() => {}) effectively creates a buffer so that everything can render before the functions inside it are called.
-      this.getTenMatches();
+    this.$nextTick(() => {  // Everything isn't fully rendered by the time mounted is called (which causes errors when the functions inside are called), so this.nextTick(() => {}) effectively creates a buffer so that everything can render before the functions inside it are called (avoids errors).
+      this.getMatches();
       this.editEndButtons();
     });
   },

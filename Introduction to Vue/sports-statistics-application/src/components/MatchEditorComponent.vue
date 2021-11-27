@@ -52,7 +52,8 @@ export default {
   },
   data() {
     return {
-      startingMatches: String
+      startingMatches: String,
+      errorWithInput: Boolean
     }
   },
   methods: {
@@ -63,6 +64,7 @@ export default {
       return data
    },
 
+    // Called when Add New Match button is pressed with adequate information in the form. Creates a new match based on the inputs in the form.
     createNewMatch() {
       // Splits the scores from each set. Used to determine whether they are valid in future if statements
       let setOneScore = document.querySelector('#setOne').value.split('-');
@@ -75,25 +77,25 @@ export default {
       let homeSets = 0;
       let awaySets = 0;
 
-      if (document.querySelector('#setOne').value.substring(0, 2) > document.querySelector('#setOne').value.substring(3))
+      if (setOneScore[0] > setOneScore[1])
           homeSets++;
       else
           awaySets++;
-      if (document.querySelector('#setTwo').value.substring(0, 2) > document.querySelector('#setTwo').value.substring(3))
+      if (setTwoScore[0] > setTwoScore[1])
           homeSets++;
       else
           awaySets++;
-      if (document.querySelector('#setThree').value.substring(0, 2) > document.querySelector('#setThree').value.substring(3))
+      if (setThreeScore[0] > setThreeScore[1])
           homeSets++;
       else
           awaySets++;
       if (document.querySelector('#setFour').value != '') {
-          if (document.querySelector('#setFour').value.substring(0, 2) > document.querySelector('#setFour').value.substring(3))
+          if (setFourScore[0] > setFourScore[1])
               homeSets++;
           else
               awaySets++;
           if (document.querySelector('#setFive').value != '') {
-          if (document.querySelector('#setFive').value.substring(0, 2) > document.querySelector('#setFive').value.substring(3))
+          if (setFiveScore[0] > setFiveScore[1])
               homeSets++;
           else
               awaySets++;
@@ -117,7 +119,7 @@ export default {
           this.formErrorMessage('No scores can be tied.');
       else if (parseInt(setThreeScore[0], 10) === parseInt(setThreeScore[1], 10))
           this.formErrorMessage('No scores can be tied.');
-      else if ((parseInt(setOneScore[0], 10) != 25 && parseInt(setOneScore[1], 10) != 25)) {  // If neither of the scores are 25, look into the score further.
+      else if ((parseInt(setOneScore[0], 10) != 25 && parseInt(setOneScore[1], 10) != 25)) {  // If either of the scores are not 25, look into the score further.
           if ((parseInt(setOneScore[0], 10) >= 24 && parseInt(setOneScore[1], 10) >= 24) && (Math.abs(parseInt(setOneScore[0], 10) - parseInt(setOneScore[1], 10)) != 2)) // If both of the scores are above 24 (the only situation where neither of the scores being 25 is possibly acceptable (win by two case)) but the difference between them is not two (meaning the set was not won by two and as such is invalid), don't make a match and let the user know.
               this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
           else if (parseInt(setOneScore[0], 10) < 25 && parseInt(setOneScore[1], 10) < 25) // If both scores are less than 25, don't make a match and let the user know.
@@ -138,39 +140,60 @@ export default {
               this.formErrorMessage('One team MUST reach 25 in order to win a set.');
           else
               this.getNewMatch(homeSets, awaySets);
-      } else if (document.querySelector('#setFour').value != '') {
-          if (homeSets > 3 || awaySets > 3)   // If home or away has won 4 sets (meaning that the user input a set (or two) beyond what should have been inputted as either home or away already won the match), the match should be over, so no 4th (or 5th depending on the input) set should exist. As such, don't make a match and let the user know. 
+      } else if (document.querySelector('#setFour').value != '') {  // If set 4 exists, more checks are needed
+        if (document.querySelector('#setFive').value === '') {  // If set 5 does not exist, certain checks can be skipped, so only do abrivieated checks inside.
+          if (homeSets > 3 || awaySets > 3)   // If home or away has won 4 sets (meaning that the user input more sets than they possible), the match should be over, so no 4th set should exist. As such, don't make a match and let the user know.
               this.formErrorMessage('There cannot be more sets if a team has already won 3 sets.');
-          
-          if (setFourScore.length != 2 || Number(setFourScore[0]) === false || Number(setFourScore[1]) === true)
+          else if (setFourScore.length != 2 || isNaN(setFourScore[0]) || isNaN(setFourScore[1]))
               this.formErrorMessage('All scores MUST be of the format [homeScore]-[awayScore]. Eg. 25-10.');
           else if (parseInt(setFourScore[0], 10) === parseInt(setFourScore[1], 10))
               this.formErrorMessage('No scores can be tied.');
           else if ((parseInt(setFourScore[0], 10) != 25 && parseInt(setFourScore[1], 10) != 25)) {
-              if ((parseInt(setFourScore[0], 10) >= 24 && parseInt(setFourScore[1], 10) >= 24) && (Math.abs(parseInt(setFourScore[0], 10) - parseInt(setFourScore[1], 10)) != 2))
-                  this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
+              if ((parseInt(setFourScore[0], 10) >= 24 && parseInt(setFourScore[1], 10) >= 24) && (Math.abs(parseInt(setFourScore[0], 10) - parseInt(setFourScore[1], 10)) === 2)) // If the scores are above 24 and the difference between is 2, it is a valid win by two, so make a match and let user know
+                this.getNewMatch(homeSets, awaySets);
+              else if ((parseInt(setFourScore[0], 10) >= 24 && parseInt(setFourScore[1], 10) >= 24) && (Math.abs(parseInt(setFourScore[0], 10) - parseInt(setFourScore[1], 10)) != 2))
+                this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
               else if (parseInt(setFourScore[0], 10) < 25 && parseInt(setFourScore[1], 10) < 25)
                   this.formErrorMessage('One team MUST reach 25 in order to win a set.');
-              else if (document.querySelector('#setFive').value === '')
-                  this.getNewMatch(homeSets, awaySets);
-          }
-
-          if (document.querySelector('#setFive').value != '') {
-              if (setFiveScore.length != 2 || Number(setFiveScore[0]) === false || Number(setFiveScore[1]) === true)
-                  this.formErrorMessage('All scores MUST be of the format [homeScore]-[awayScore]. Eg. 25-10.');
-              else if (parseInt(setOneScore[0], 10) === parseInt(setOneScore[1], 10))
-                  this.formErrorMessage('No scores can be tied.');
-              else if ((parseInt(setFiveScore[0], 10) != 25 && parseInt(setFiveScore[1], 10) != 25)) {
-                  if ((parseInt(setFiveScore[0], 10) >= 24 && parseInt(setFiveScore[1], 10) >= 24) && (Math.abs(parseInt(setFiveScore[0], 10) - parseInt(setFiveScore[1], 10)) != 2))
-                    this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
-                  else if (parseInt(setFiveScore[0], 10) < 25 && parseInt(setFiveScore[1], 10) < 25)
+          } else  // If all is valid about set 4 and no special cases apply (which are dealt with when they apply if they apply), create a match and let the user know.
+              this.getNewMatch(homeSets, awaySets);
+        } else {  // If set 5 exists, more checks are needed, so do full checks inside.
+          if (homeSets > 3 || awaySets > 3)   // If home or away has won 4 sets (meaning that the user input more sets than they possible), the match should be over, so no 4th/5th set should exist. As such, don't make a match and let the user know.
+              this.formErrorMessage('There cannot be more sets if a team has already won 3 sets.');
+          else if ((setFourScore.length != 2 || isNaN(setFourScore[0]) || isNaN(setFourScore[1])) || (setFiveScore.length != 2 || isNaN(setFiveScore[0]) || isNaN(setFiveScore[1])))   // If the score for set 4 OR set 5 is not valid/formatted correctly, don't make a match and let the user know.
+              this.formErrorMessage('All scores MUST be of the format [homeScore]-[awayScore]. Eg. 25-10.');
+          else if ((parseInt(setFourScore[0], 10) === parseInt(setFourScore[1], 10)) || (parseInt(setOneScore[0], 10) === parseInt(setOneScore[1], 10)))
+              this.formErrorMessage('No scores can be tied.');
+          else if ((parseInt(setFourScore[0], 10) != 25 && parseInt(setFourScore[1], 10) != 25) || (parseInt(setFiveScore[0], 10) != 25 && parseInt(setFiveScore[1], 10) != 25)) {
+              if (parseInt(setFourScore[0], 10) != 25 && parseInt(setFourScore[1], 10) != 25) { // If set 4 is possible win by two (set 5 might also be)
+                if ((parseInt(setFourScore[0], 10) >= 24 && parseInt(setFourScore[1], 10) >= 24) && (Math.abs(parseInt(setFourScore[0], 10) - parseInt(setFourScore[1], 10)) === 2)) { // If the scores are above 24 and the difference between is 2, set 4 is a valid win by two, but set 5 might be a invalid win by two so check it
+                  if (parseInt(setFiveScore[0], 10) != 25 && parseInt(setFiveScore[1], 10) != 25) {
+                    if ((parseInt(setFiveScore[0], 10) >= 24 && parseInt(setFiveScore[1], 10) >= 24) && (Math.abs(parseInt(setFiveScore[0], 10) - parseInt(setFiveScore[1], 10)) === 2)) // Both set 4 and 5 are valid win by twos, so make a match and let the user know
+                      this.getNewMatch(homeSets, awaySets);
+                    else if ((parseInt(setFourScore[0], 10) >= 24 && parseInt(setFourScore[1], 10) >= 24) && (Math.abs(parseInt(setFourScore[0], 10) - parseInt(setFourScore[1], 10)) != 2)) // Set 4 is a valid win by two but set 5 is not (don't make a match)
+                      this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
+                    else if (parseInt(setFourScore[0], 10) < 25 && parseInt(setFourScore[1], 10) < 25)  // Set 4 is a valid win by two but set 5 is not (don't make a match)
+                      this.formErrorMessage('One team MUST reach 25 in order to win a set.');
+                  } else // Set 4 is a valid win by two, set 5 is not a win by two but is still valid, so make a match and let the user know
+                      this.getNewMatch(homeSets, awaySets);
+                } else if ((parseInt(setFourScore[0], 10) >= 24 && parseInt(setFourScore[1], 10) >= 24) && (Math.abs(parseInt(setFourScore[0], 10) - parseInt(setFourScore[1], 10)) != 2))  // Set 4 is not valid (don't make a match)
+                  this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
+                else if (parseInt(setFourScore[0], 10) < 25 && parseInt(setFourScore[1], 10) < 25) // Set 4 is not valid (don't make a match)
                     this.formErrorMessage('One team MUST reach 25 in order to win a set.');
-                  else
-                    this.getNewMatch(homeSets, awaySets);
+              } else if (parseInt(setFiveScore[0], 10) != 25 && parseInt(setFiveScore[1], 10) != 25) { // Set 4 is NOT a possible win by two but set 5 is, check further
+                if ((parseInt(setFiveScore[0], 10) >= 24 && parseInt(setFiveScore[1], 10) >= 24) && (Math.abs(parseInt(setFiveScore[0], 10) - parseInt(setFiveScore[1], 10)) === 2))  // Set 5 is a valid win by two and since we know set 4 is not a win by two already (would have gone through previous if), make a match and let the user know
+                  this.getNewMatch(homeSets, awaySets);
+                else if ((parseInt(setFiveScore[0], 10) >= 24 && parseInt(setFiveScore[1], 10) >= 24) && (Math.abs(parseInt(setFiveScore[0], 10) - parseInt(setFiveScore[1], 10)) === 2)) // Set 5 is not valid win by two, so don't make a match and let user know
+                  this.formErrorMessage('Scores cannot be above 25 unless they are 2 apart.');
+                else if (parseInt(setFiveScore[0], 10) < 25 && parseInt(setFiveScore[1], 10) < 25)  // Set 5 is not valid win by two, so don't make a match and let user know
+                  this.formErrorMessage('One team MUST reach 25 in order to win a set.');
+                else
+                  this.getNewMatch(homeSets, awaySets);
               }
-          }
-          this.getNewMatch(homeSets, awaySets);  // If nothing is wrong with the 4th or 5th sets and it wasn't the special case of win by two (which was already delt with in those if statements), make a match and let the user know.
-      } else    // If the match is valid make a match and let the user know.
+          } else  // Neither set 4 or set 5 is a possible win by two and are otherwise valid, so make a match and let the user know
+              this.getNewMatch(homeSets, awaySets);
+        }
+      } else  // Set 4 and 5 don't exist and math is otherwise valid, so make a match and let the user know.
         this.getNewMatch(homeSets, awaySets);
 
       // Once the match is made, clear all the input fields.
@@ -183,6 +206,7 @@ export default {
       document.querySelector('#setFive').value = '';
   },
 
+  // Called from createNewMatch() when the input is valid and a new match should be created.
   getNewMatch(homeSets, awaySets) {
     const newMatch = {
         home: document.querySelector('#homeTeam').value.toUpperCase() === 'USA' ? document.querySelector('#homeTeam').value.toUpperCase() : document.querySelector('#homeTeam').value.substring(0, 1).toUpperCase() + document.querySelector('#homeTeam').value.substring(1).toLowerCase(), // Make the team's first letter capitalized and the rest lowercase unless it is the USA in which case make the whole thing uppercase.
@@ -200,40 +224,44 @@ export default {
     this.postMatch(newMatch);
   },
 
-  // Displays a specific message based off of the msg variable that tells the user was they did wrong.
+  // Posts the new match passed in into the database and lets the user know if it was successful or not. Called from getNewMatch() where newMatch is created.
+  async postMatch(newMatch) {
+    const res = await fetch('http://localhost:5000/matches', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(newMatch)
+    });
+
+    res.status === 201 ? this.matchesEditedMsg('Match Added.') : alert('Error Posting Match.'); // After POST is complete, check status and let the user know whether it was successful or not
+  },
+
+  // Displays a specific message based off of the msg variable telling the user was they did wrong.
   formErrorMessage(msg) {
+    this.errorWithInput = true; // Sets errorWithInput to true making it so that if getNewMatch() is called from createNewMatch() it will not run (as this function running beforehand means there is an error with the input, so no match should be created)
     document.querySelector('#msg').classList.remove('text-success');
     document.querySelector('#msg').classList.add('text-danger');
     document.querySelector('#msg').innerHTML = msg;
     setTimeout(function() {document.querySelector('#msg').innerHTML = ''}, 3000);
   },
 
-  async postMatch(newMatch) {
-    fetch('http://localhost:5000/matches', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(newMatch)
-    }).then(res => {
-        res.status === 201 ? this.matchesEditedMsg('Match Added.') : alert('Error Posting Match.');
-    });
-  },
-
+  // Deletes a match from the database determined by the inputted id and lets the user know if it was successful or not. Called when Delete Match button is pressed.
   async deleteMatch() {
     let matchId = document.querySelector("#deleteMatch").value;
-    if (isNaN(matchId)) {
+    if (isNaN(matchId)) {   // Make sure matchId is strictly a number (response status will deal with if the number is not an existing id)
       this.formErrorMessage(`Please enter a valid id (MUST be a number)`)
     } else {
-        fetch(`http://localhost:5000/matches/${matchId}`, {
+        const res = await fetch(`http://localhost:5000/matches/${matchId}`, {
           method: 'DELETE'
-      }).then(res => {
-        res.status === 200 ? this.matchesEditedMsg(`Match ${matchId} Deleted.`) : alert('Error Deleting Match (id may be invalid).');
       });
+
+      res.status === 200 ? this.matchesEditedMsg(`Match ${matchId} Deleted.`) : alert('Error Deleting Match (id may be invalid).'); // After DELETE is complete, check status and let the user know whether it was successful or not
     }
-    document.querySelector('#deleteMatch').value = '';
+    document.querySelector('#deleteMatch').value = ''; // Clear #deleteMatch input field
   },
 
+  // Displays a message (based on what is passed into msg) when the matches array in the database is successfully edited.
   matchesEditedMsg(msg) {
       document.querySelector('#msg').classList.remove('text-danger');
       document.querySelector('#msg').classList.add('text-success'); 
@@ -243,6 +271,7 @@ export default {
   },
   mounted() {
     this.startingMatches = 120;
+    this.errorWithInput = false;
   }
 }
 </script>

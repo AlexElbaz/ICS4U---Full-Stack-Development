@@ -230,7 +230,7 @@ export default {
       // Gets flags from assets folder and styles them to fit appropriately for the standings.
       getFlag(teamName) {
          let flag = document.createElement('img');
-         flag.src = this.getFlagUrl(teamName); // Gets path to image
+         flag.src = this.getFlagUrl(teamName); // Gets path to specific team's flag image
          flag.style.width = '50px';
          flag.classList.add('d-none', 'd-sm-inline');
          flag.style.marginRight = '10px';
@@ -238,7 +238,7 @@ export default {
          return flag;
       },
 
-      // Gets paths for/preloads the flags so that they can be used.
+      // Gets paths for/preloads the team flags so that they can dispaly properly.
       getFlagUrl(flag) {
          let img = require.context('../assets/', false, /\.png$/);
          return img('./' + flag + ".png");
