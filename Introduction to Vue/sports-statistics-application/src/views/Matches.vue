@@ -1,7 +1,5 @@
 <template>
-  <div class="matches">
-    <MatchesComponent />
-  </div>
+  <MatchesComponent title="Volleyball Nations League 2021 Match History"/>
 </template>
 
 <script>

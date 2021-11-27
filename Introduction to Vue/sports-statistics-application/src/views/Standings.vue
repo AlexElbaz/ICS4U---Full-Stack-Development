@@ -1,7 +1,5 @@
 <template>
-  <div class="standings">
-    <StandingsComponent />
-  </div>
+  <StandingsComponent title="Volleyball Nations League 2021 Standings"/>
 </template>
 
 <script>

@@ -13,9 +13,9 @@ const routes = [
     component: () => import('../views/Matches.vue')
   },
   {
-    path: '/addmatch',
-    name: 'Addmatch',
-    component: () => import('../views/AddMatch.vue')
+    path: '/matchEditor',
+    name: 'Matcheditor',
+    component: () => import('../views/MatchEditor.vue')
   }
 ]
 

@@ -1,29 +1,17 @@
 <template>
-<div class="container">
-  <nav class="navbar navbar-expand-lg bg-primary navbar-dark py-3 fixed-top">
-    <div class="container">
-      <a href="#" class="h1 bg-primary text-decoration-none text-light">VNL 2021 Statistics</a>
-      <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navmenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item text-center text-lg-start">
-            <router-link to="/" class="nav-link">Standings</router-link>
-          </li>
-          <li class="nav-item text-center text-lg-start">
-            <router-link to="/matches" class="nav-link">Match History</router-link>
-          </li>
-          <li class="nav-item text-center text-lg-start">
-            <router-link to="/addmatch" class="nav-link">Add Matches</router-link>
-          </li>
-          </ul>
-      </div>
-    </div>
-  </nav><br />
-  <div class="margin-from-nav">
-    <router-view></router-view>
-  </div>
-</div>
+  <Navbar title="VNL 2021 Standings" pathOneName="Standings" pathTwoName="Match History" pathThreeName="Match Editor"/>
 </template>
+
+<script>
+import Navbar from '@/components/Navbar.vue';
+
+  export default {
+    name: "App",
+    components: {
+      Navbar
+    }
+  }
+</script>
 
 <style>
 .margin-from-nav {
