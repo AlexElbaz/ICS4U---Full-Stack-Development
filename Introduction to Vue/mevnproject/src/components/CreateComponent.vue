@@ -28,11 +28,11 @@
 <script>
 import axios from 'axios';
 
-    export default {
-        data(){
-        return {
-          post: {}
-        }
+  export default {
+    data(){
+      return {
+        post: {}
+      }
     },
     methods: {
       async addPost(){

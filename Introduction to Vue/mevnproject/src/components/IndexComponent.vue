@@ -32,11 +32,11 @@
 import axios from 'axios';
 
   export default {
-      data() {
-        return {
-          posts: []
-        }
-      },
+    data() {
+      return {
+        posts: []
+      }
+    },
     methods: {
       async deletePost(id) {
         let uri = `http://localhost:4000/posts/delete/${id}`;

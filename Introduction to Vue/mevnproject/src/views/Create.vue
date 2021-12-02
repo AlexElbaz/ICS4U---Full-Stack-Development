@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-  <CreateComponent />
+    <CreateComponent />
   </div>
 </template>
 
@@ -11,14 +11,6 @@ export default {
     name: 'Create',
     components: {
         CreateComponent
-    },
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-
     }
 }
 </script>

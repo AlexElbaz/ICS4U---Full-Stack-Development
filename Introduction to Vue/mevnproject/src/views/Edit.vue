@@ -9,9 +9,6 @@ import EditComponent from '@/components/EditComponent.vue'
 
 export default {
   name: 'Edit',
-  props: {
-
-  },
   components: {
     EditComponent
   }
