@@ -36,7 +36,7 @@ import axios from 'axios';
     },
     methods: {
       async addPost(){
-        let uri = 'http://localhost:4000/posts/add';
+        let uri = 'http://localhost:5000/api/add';
         await axios.post(uri, this.post)
         this.$router.push({name: 'posts'});
       }

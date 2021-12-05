@@ -29,7 +29,28 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes: [
+    {
+      name: 'home',
+      path: '/',
+      component: Home
+    },
+    {
+      name: 'create',
+      path: '/create',
+      component: Create
+    },
+    {
+      name: 'posts',
+      path: '/posts',
+      component: Posts,
+    },
+    {
+      name: 'edit',
+      path: '/edit/:id',
+      component: Edit
+    }
+  ]
 })
 
 export default router

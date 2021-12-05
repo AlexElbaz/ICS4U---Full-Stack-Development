@@ -39,13 +39,13 @@ import axios from 'axios';
     },
     methods: {
       async deletePost(id) {
-        let uri = `http://localhost:4000/posts/delete/${id}`;
+        let uri = `http://localhost:5000/api/delete/${id}`;
         const res = await axios.delete(uri);
         res.status === 200 ? this.posts = this.posts.filter(post => post._id != id) : alert('Error Deleting Post.');
       }
     },
     async created() {
-      let uri = 'http://localhost:4000/posts';
+      let uri = 'http://localhost:5000/api';
       const res = await axios.get(uri);
       this.posts = res.data;
     }
