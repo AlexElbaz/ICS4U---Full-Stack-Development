@@ -35,16 +35,16 @@ import axios from 'axios';
       }
     },
     methods: {
-      updatePost() {
+      async updatePost() {
         let uri = `http://localhost:5000/api/update/${this.$route.params.id}`;
-        axios.patch(uri, this.post).then(() => {
-          this.$router.push({name: 'posts'});
-        });
+        await axios.patch(uri, this.post);
+        this.$router.push({name: 'posts'});
       }
     },
-    created() {
+    async created() {
       let uri = `http://localhost:5000/api/post/${this.$route.params.id}`;
-      axios.get(uri).then((response) => { this.post = response.data; });
+      const res = await axios.get(uri);
+      this.post = res.data;
     }
   }
 </script>

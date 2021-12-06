@@ -5,16 +5,15 @@ const postRoutes = express.Router();
 let Post = require('./post.model');
 
 // Defined store route
-postRoutes.route('/add').post((req, res) => {
+postRoutes.route('/add').post(async (req, res) => {
   let post = new Post(req.body);
-  post.save()
-    .then(() => {
-      console.log(post);
-      res.status(200).json(post);
-    })
-    .catch(() => {
-      res.status(400).send("unable to save to database");
-    });
+  try {
+    await post.save()
+    console.log(post);
+    res.status(200).json(post);
+  } catch (e) {
+    res.status(400).send("Unable to save to database");
+  }
 });
 
 // Defined get data(index or listing) route
@@ -34,18 +33,19 @@ postRoutes.route('/post/:id').get((req, res) => {
 
 //  Defined update route
 postRoutes.route('/update/:id').patch((req, res) => {
-    Post.findById(req.params.id, (err, post) => {
+    Post.findById(req.params.id, async (err, post) => {
     if (!post)
       res.status(404).send("data is not found");
     else {
       post.title = req.body.title;
       post.body = req.body.body;
 
-      post.save().then(() => {
+      try {
+        await post.save()
         res.json('Update complete');
-      }).catch(() => {
-          res.status(400).send("unable to update the database");
-      });
+      } catch (e) {
+        res.status(400).send("unable to update the database");
+      }
     }
   });
 });
